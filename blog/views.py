@@ -1,15 +1,21 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import Post
 
-def index(request):
-    posts = Post.objects.all().order_by('-pk') #데이터베이스에 접근
+class PostList(ListView): #index말고 class 로 정의
+    model = Post
+    template_name = 'blog/index.html'
+    ordering = '-pk'
 
-    return render(
-        request, 'blog/index.html',
-        {
-            'posts':posts,
-        }
-    )
+# def index(request):
+#     posts = Post.objects.all().order_by('-pk') #데이터베이스에 접근
+#
+#     return render(
+#         request, 'blog/index.html',
+#         {
+#             'posts':posts,
+#         }
+#     )
 
 def single_post_page(request, pk):
     post = Post.objects.get(pk=pk)
