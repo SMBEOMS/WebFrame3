@@ -57,6 +57,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -110,8 +111,12 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+import os
 
-STATIC_URL = "static/"
+STATIC_URL = "static/" #>> blog> static > blog 생성
+
+MEDIA_URL = '/media/' #url
+MEDIA_ROOT = os.path.join(BASE_DIR, '_media') #BASE_DIR = WebFrame3 // server local
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

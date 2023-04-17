@@ -4,6 +4,11 @@ from django.db import models
 class Post(models.Model): #일종의 DB구조, field설정
     title = models.CharField(max_length=30)
     contents = models.TextField()
+    hook_text = models.CharField(max_length=100, blank= True)
+
+
+    head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
+    file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d/', blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)#자동으로 시간 맞춰줌
     updated_at = models.DateTimeField(auto_now=True) #자동으로 시간 맞춰줌
