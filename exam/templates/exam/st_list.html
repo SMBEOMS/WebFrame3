@@ -1,0 +1,31 @@
+{% extends 'exam/base.html' %} <!--나머지 양식은 base.html에서 갖고옴-->
+                    {%block menu %}
+                    <h3>작은 글씨 메뉴</h3>
+                    {% endblock %}
+
+                {% block main_area %}
+
+
+                 <div class="col-9">
+                            <!-- table List -->
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">St_ID</th>
+                                    <th scope= "col">NAME</th>
+                                    <th scope="col">DETAIL</th>
+                                  </tr>
+                                </thead>
+                                {% for s in student_list %} <!-- student 모델이라서 갖고와서 리스트로 따라감
+                                                                 디테일은 student만 옴-->
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">{{ s.num }} </th>
+                                    <td>{{ s.name }}</td>
+                                    <td><a class="btn btn-outline-success" href="{{s.get_absolute_url}}" role="button">학생증 보기</a></td>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+
+                 </div>
+         {% endblock %}

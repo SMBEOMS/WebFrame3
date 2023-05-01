@@ -1,0 +1,20 @@
+{% extends 'exam/base.html' %} <!--나머지 양식은 base.html에서 갖고옴-->
+                {% block main_area %}
+                 <div class="col-9">
+                     <h3>{{ student.name}}의 ID CARD</h3>
+                     <div class="card" style="width: 18rem;">
+                         {% if student.image %}
+                         <img src="{{student.image.url}}" class="card-img-top" alt="...">
+                         {% else %}
+                         <img src="https://loremflickr.com/300/200/" class="card-img-top" alt="...">
+                         {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ student.name}}</h5>
+                            <p class="card-text">학번 : {{ student.num }}</p>
+                            <p class="card-text">학과 : {{ student.Depart }}</p>
+                            <p class="card-text">생년월일 : {{ student.brith}} </p>
+
+                        </div>
+                      </div>
+                 </div>
+                      {% endblock %}

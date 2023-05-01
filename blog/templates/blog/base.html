@@ -20,11 +20,53 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/70c1541487.js" crossorigin="anonymous"></script>
 </head>
-<div>
-    {% extends 'blog/base.html' %}
 
-    {% block main_area %}
-    {% endblock %}
+    {% include 'blog/nav.html' %} <!-- 조각파일을 합칠때는 include -->
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-sm-8">
+
+                <!-- Blog post-->
+            {% for p in post_list %} <!-- 데이터량 만큼 반복하기-->
+                <div class="card mb-4">
+
+                    {% if p.head_image %} <!-- 헤드 이미지가 있으면 출력해라~ if문-->
+                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head_image" height="200"/>
+                    {% else %}
+                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.pk }}/800/200" alt="random image" /> <!--p.pk == 숫자별로 랜덤 그림 -->
+                    {% endif %}
+
+                    <div class="card-body">
+                        <div class="small text-muted">{{ p.created_at }}</div>
+                        <h2 class="card-title h4">{{ p.title }}</h2>
+
+                        {% if p.hook_text %}
+                        <h5 class="text-muted">{{ p.hook_text }}</h5>
+                        {% endif %}
+
+                        <p class="card-text">{{ p.contents | truncatechars:5 }} </p> <!--truncatechars 5글자뒤 요약 -->
+                        <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
+                    </div>
+                </div>
+            {% endfor %}
+                <!-- Pagination-->
+                <nav aria-label="Pagination">
+                    <hr class="my-0" />
+                    <ul class="pagination justify-content-center my-4">
+                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                    </ul>
+                </nav>`
+            </div>
+            {% block main_area %}
+            {% endblock %}
+            <!-- side widget-->
             <div class="col-sm-4">
                 <!-- Search widget-->
                 <div class="card mb-4">
@@ -62,6 +104,10 @@
             </div>
         </div>
     </div>
+    
+    
+    <!-- Footer-->
 
+    {% include 'blog/footer.html' %}
 </body>
 </html>
