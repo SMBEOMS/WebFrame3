@@ -1,11 +1,9 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    #path('',views.index),
-    #path('<int:pk>/', views.single_post_page), #bolg/숫자 넣어야 함
-    path('',views.PostList.as_view()),
+    path('', views.PostList.as_view()),
     path('<int:pk>/', views.PostDetail.as_view()),
-]
-#pk = 숫자
+    #path('', views.index), #FBV 스타일로 post_list페이지 만들기
+    #path('<int:pk>/', views.single_post_page), #FBV로 post_detail 페이지 만들기
+    ]
