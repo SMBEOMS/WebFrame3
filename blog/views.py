@@ -1,10 +1,11 @@
 # from django.shortcuts import render
 from django.views.generic import ListView,DetailView #CBV로 페이지 만들기
-from .models import Post
+from .models import Post, Category
 
 class PostList(ListView):
     model = Post
     ordering = '-pk' #ListView로 포스트 목록 페이지 만들기
+    
 
 class PostDetail(DetailView):
     model = Post

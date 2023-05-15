@@ -6,7 +6,7 @@
         <h1>Blog</h1>
         {% if post_list.exists %}
             {% for p in post_list %}
-                <div class="card mb-4" id="post-{{ p. pk }}">
+                <div class="card mb-4" id="post-{{ p.pk }}">
                     {% if p.head_image %}
                     <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head_image" height="300" />
                     {% else %}

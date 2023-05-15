@@ -1,0 +1,11 @@
+# created by virtualenv automatically
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+#Pycharm
+.idea/
+migrations/
+_media/
+
