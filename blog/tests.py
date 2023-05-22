@@ -7,8 +7,8 @@ from .models import Post
 class TestView(TestCase):
     def setUp(self):
         self.client = Client()
-        #self.user_0001 = User.objects.create_user(username='0001', password='somepassword')
-        #self.user_0002 = User.objects.create_user(username='0002', password='somepassword')
+        self.user_0001 = User.objects.create_user(username='0001', password='somepassword')
+        self.user_0002 = User.objects.create_user(username='0002', password='somepassword')
 
     def navbar_test(self, soup):
         navbar = soup.nav
@@ -51,13 +51,13 @@ class TestView(TestCase):
         # 3.1 게시물이 2개 있다면
         post_001 = Post.objects.create(
             title = '첫 번째 포스입니다.',
-            content = 'Hello World. We are the world.',
-            #author = self.user_0001,
+            contents = 'Hello World. We are the world.',
+            author = self.user_0001,
         )
         post_002 = Post.objects.create(
             title = '두 번째 포스트입니다.',
-            content = '1등이 전부는 아니잖아요?',
-            #author = self.user_0002,
+            contents = '1등이 전부는 아니잖아요?',
+            author = self.user_0002,
         )
         self.assertEqual(Post.objects.count(), 2)
 
@@ -80,7 +80,7 @@ class TestView(TestCase):
         # 1.1 Post가 하나 있다.
         post_001 = Post.objects.create(
             title = '첫 번째 포스트입니다.',
-            content = 'Hello World, We are the world.',
+            contents = 'Hello World, We are the world.',
             author = self.user_0001,
         )
         # 1.2 그 포스트의 url은 'blog/1/' 이다.
@@ -110,4 +110,4 @@ class TestView(TestCase):
         self.assertIn(self.user_0001.username.upper(), post_area.text)
 
         # 2.6 첫 번째 포스트의 내용(content)이 포스트 영역에 있다.
-        self.assertIn(post_001.content, post_area.text)
+        self.assertIn(post_001.contents, post_area.text)

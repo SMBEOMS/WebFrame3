@@ -3,7 +3,11 @@
 
     {% block main_area %}
                 <!-- Blog post -->
-        <h1>Blog</h1>
+        <h1>Blog
+            {% if category %}<span class ="badge badge-secondary">{{ category }}</span>
+            {% endif %}
+        </h1>
+
         {% if post_list.exists %}
             {% for p in post_list %}
                 <div class="card mb-4" id="post-{{ p.pk }}">
@@ -15,10 +19,13 @@
 
                     <div class="card-body">
                         {% if p.category %}
-                        <span class = "badge badge-secondary float-right">{{ p.category }}</span>
+                            <span class = "badge badge-secondary float-right">{{ p.category }}</span>
                         {% else %}
-                        <span class = "badge badge-secondary float-right">미분류</span>
+                            <span class = "badge badge-secondary float-right">미분류</span>
                         {% endif %}
+
+
+
                         <!--
                         <div class="small text-muted">{{ p.created_at }} by {{ p.author | upper}}</div> -->
                         <h2 class="card-title h4">{{ p.title }}</h2>
@@ -28,6 +35,16 @@
 
 
                         <p class="card-text">{{ p.contents | truncatewords:5 }}</p>
+
+                        <!-- tag area -->
+                        {% if p.tags.exists %}
+                            <i class = "fas fa-tags"></i>
+                            {% for tag in p.tags.all %}
+                                <span class = "badge badge-pill badge-light">{{ tag }}</span>
+                            {% endfor %}
+                        <br /><br />
+
+                        {% endif %}
                         <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
                     </div>
                     <div class = "card-footer text-muted">

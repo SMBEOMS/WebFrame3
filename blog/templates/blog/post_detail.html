@@ -21,9 +21,9 @@
                             by <a href="#">{{ post.author | upper }}</a></div>
                         <!-- Post categories-->
                         {% if post.category %}
-                        <span class = "badge badge-secondary">{{ post.category }}</span>
+                        <span class = "badge badge-secondary float-right">{{ post.category }}</span>
                         {% else %}
-                        <span class = "badge badge-secondary">미분류</span>
+                        <span class = "badge badge-secondary float-right">미분류</span>
                         {% endif %}
                     </header>
                     <!-- Preview image figure-->
@@ -53,6 +53,19 @@
                             </a>
                         {% endif %}
                     </section>
+
+                    <p class="card-text">{{ p.contents }}</p>
+
+                        <!-- tag area -->
+                        {% if post.tags.exists %}
+                            <i class = "fas fa-tags"></i>
+                            {% for tag in post.tags.all %}
+                                <span class = "badge badge-pill badge-light">{{ tag }}</span>
+                            {% endfor %}
+                        <br /><br />
+                        {% endif %}
+
+
                 </div>
                 </article>
 
